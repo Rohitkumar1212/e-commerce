@@ -1,12 +1,21 @@
 "use client"
+import SearchResult from '@/components/SearchResult'
+import { useSupabase } from '@/lib/supabase/hooks/useSupabase'
 import { useParams } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const query = () => {
     const { query } = useParams()
-    console.log("query--", query)
+    const {filterData, getFilterDataFromSupabase } = useSupabase()
+
+    useEffect(()=>{
+        getFilterDataFromSupabase(query)
+    },[query])
+    console.log("products--", filterData)
   return (
-    <div>{query}</div>
+    <div>
+        <SearchResult filterData={filterData} />
+    </div>
   )
 }
 
