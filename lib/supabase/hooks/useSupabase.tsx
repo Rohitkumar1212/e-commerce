@@ -4,6 +4,7 @@ import { supabase } from "../products"
 export const useSupabase = () => {
     const [products, setProducts] = useState<any>([])
     const [filterData, setFilterData] = useState<any>([])
+    const [singleProduct, setSingleProduct] = useState<any>([])
     const getDataFromSupabase = async () => {
         let { data, error } = await supabase.from('products').select("*")
         if (data) {
@@ -11,9 +12,10 @@ export const useSupabase = () => {
             setProducts(data)
         }
         if (error) {
-            console.log("error -", error)
+            console.log("error getDataFromSupabase ", error)
         }
     }
+    
     const getFilterDataFromSupabase = async (query: string | string[]) => {
         // If query is an array, convert it to a single string
         if (Array.isArray(query)) {
@@ -27,8 +29,19 @@ export const useSupabase = () => {
             setFilterData(data)
         }
         if (error) {
-            console.log("error -", error)
+            console.log("error in getFilterDataFromSupabase ", error)
         }
     }
-    return { products, getDataFromSupabase, filterData, getFilterDataFromSupabase }
+
+    const getSingleProductFromSupabase = async (id: number) => {
+        let { error, data } = await supabase.from("products").select("*").eq("id", id)
+        if (data) {
+            console.log(data)
+            setSingleProduct(data)
+        }
+        if (error) {
+            console.log("error in getSingleProduct ", error)
+        }
+    }
+    return { products, getDataFromSupabase, filterData, getFilterDataFromSupabase, singleProduct, getSingleProductFromSupabase }
 }
