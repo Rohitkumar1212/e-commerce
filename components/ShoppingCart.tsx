@@ -29,7 +29,7 @@ const ShoppingCart = () => {
                                 className='font-bold cursor-pointer text-red-600'>Remove</h3>
                                 <div className='text-xl font-medium flex justify-between items-center w-fit bg-gray-200 rounded-md px-5 py-1 my-4'>
                                     <div
-                                    onClick={()=>dispatch(decreamentQuantity(product))}
+                                    onClick={()=>product.quantity>1 && dispatch(decreamentQuantity(product))}
                                     className='cursor-pointer mr-4'>-</div>
                                     <div className='cursor-pointer'>{product.quantity}</div>
                                     <div

@@ -40,14 +40,14 @@ const cartSlice = createSlice({
         },
         decreamentQuantity:(state, action)=>{
             state.cart = state.cart.map((item:any)=>{
-                // return item.id === action.payload.id ?({...item, quantity: item.quantity-1}):item;
+                return item.id === action.payload.id ?({...item, quantity: item.quantity-1}):item;
                 //handling non negative item value
-                if (item.id === action.payload.id) {
-                    const newQuantity = Math.max(item.quantity - 1, 0); // Ensures quantity won't be negative
-                    return { ...item, quantity: newQuantity };
-                } else {
-                    return item;
-                }
+                // if (item.id === action.payload.id) {
+                //     const newQuantity = Math.max(item.quantity - 1, 0); // Ensures quantity won't be negative
+                //     return { ...item, quantity: newQuantity };
+                // } else {
+                //     return item;
+                // }
             })
         }
     }
