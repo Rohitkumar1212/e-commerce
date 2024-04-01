@@ -7,6 +7,7 @@ import { CgSearch } from 'react-icons/cg'
 import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/lib/supabase/hooks/redux'
 import { getCart } from '@/redux/cartSlice'
+import Link from 'next/link'
 
 const Header = () => {
     const [query, setQuery ] = useState<string>("")
@@ -20,9 +21,9 @@ const Header = () => {
   return (
     <div className='bg-[#131921] text-white pt-4 pb-3'>
         <div className='flex items-center justify-between w-[90%] mx-auto'>
-            <div>
+            <Link href={`/`}>
                 <Image src={Logo} width={120} height={120} alt='Logo'/>
-            </div>
+            </Link>
             <div className='w-[80%] flex items-center'>
                 <div className='flex relative w-[70%] mx-auto'>
                 <input
@@ -45,7 +46,7 @@ const Header = () => {
                     <p className='text-xs'>Returns</p>
                     <h3 className='font-medium text-xs'>& Orders</h3>
                 </div>
-                <div className='cursor-pointer'>
+                <Link href="/cart" className='cursor-pointer'>
                     <div className='flex relative'>
                         <div>
                             <BiCart size={"40px"}/>
@@ -53,8 +54,7 @@ const Header = () => {
                         <h3 className='mt-4'>cart</h3>
                         <p className='absolute top-[-8px] left-[18px]'>{cart.length}</p>
                     </div>
-                    
-                </div>
+                </Link>
             </div>
         </div>
     </div>
