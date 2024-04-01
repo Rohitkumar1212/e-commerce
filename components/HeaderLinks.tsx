@@ -1,7 +1,8 @@
+import { supabase } from '@/lib/supabase/products'
 import Link from 'next/link'
 import React from 'react'
 
-const HeaderLinks = () => {
+const HeaderLinks = ({router}:{router:any}) => {
     const itemLists = [
         "All",
         "Fresh",
@@ -15,6 +16,11 @@ const HeaderLinks = () => {
         "Gift Ideas",
         "Health, Husehold & Personal Care"
     ]
+
+    const handleSignOut = async()=>{
+        const { error } = await supabase.auth.signOut()
+        router.push("/signin")
+    }
     return (
         <>
             <div className='bg-[#232F3E] w-full text-white flex justify-between  py-2'>
@@ -24,7 +30,7 @@ const HeaderLinks = () => {
                     ))}
                 </div>
                 <div className='mr-5'>
-                    <h3 className='text-[#FEBD69] font-bold cursor-pointer hover:underline'>Sign Out</h3>
+                    <h3 onClick={handleSignOut} className='text-[#FEBD69] font-bold cursor-pointer hover:underline'>Sign Out</h3>
                 </div>
             </div>
 

@@ -22,7 +22,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <ReduxProvider>
           <Header />
-          <HeaderLinks />
           {children}
         </ReduxProvider>
       </body>

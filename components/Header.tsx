@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Logo from "../public/amazon-logo-2.webp"
 import { BiCart } from 'react-icons/bi'
 import { CgSearch } from 'react-icons/cg'
@@ -8,17 +8,30 @@ import { useRouter } from 'next/navigation'
 import { useAppSelector } from '@/lib/supabase/hooks/redux'
 import { getCart } from '@/redux/cartSlice'
 import Link from 'next/link'
+import { supabase } from '@/lib/supabase/products'
+import HeaderLinks from './HeaderLinks'
 
 const Header = () => {
     const [query, setQuery ] = useState<string>("")
-    const route = useRouter()
+    const [user, setUser] = useState<any>(null)
+    const router = useRouter()
 
     const cart = useAppSelector(getCart)
 
     const searchHandler = () => {
-        route.push(`/search/${query}`)
+        router.push(`/search/${query}`)
     }
+
+    const getUserData = async()=>{
+        const { data: { user } } = await supabase.auth.getUser()
+        setUser(user)
+    }
+    useEffect(()=>{
+        getUserData()
+    },[])
+    console.log("user", user)
   return (
+    <>
     <div className='bg-[#131921] text-white pt-4 pb-3'>
         <div className='flex items-center justify-between w-[90%] mx-auto'>
             <Link href={`/`}>
@@ -38,8 +51,12 @@ const Header = () => {
                 </div>
             </div>
             <div className='flex items-center justify-around w-[20%]'>
-                <div className='cursor-pointer'>
-                    <h3 className='text-xs'>Hello, Rohit</h3>
+                <div
+                 onClick={()=>router.push("/signin")}
+                className='cursor-pointer'>
+                    <h3
+                   
+                    className='text-xs hover:underline'> {`${user ? user.identities[0].identity_data.user_name: "Sign In"}`}</h3>
                     <h3 className='font-medium text-xs'>Account & Lists</h3>
                 </div>
                 <div className='cursor-pointer'>
@@ -58,6 +75,8 @@ const Header = () => {
             </div>
         </div>
     </div>
+    <HeaderLinks router={router}/>
+    </>
   )
 }
 

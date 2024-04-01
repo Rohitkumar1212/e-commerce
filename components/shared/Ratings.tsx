@@ -10,7 +10,7 @@ const Ratings = ({ ratings }: { ratings: any }) => {
     return (
         <div className='flex items-center'>
             {
-                Array(4).fill(1).map((dummyData)=><Image src={ratingStar} height={20} width={20} alt='rating' />)
+                Array(4).fill(1).map((dummyData, i)=><Image src={ratingStar} height={20} width={20} alt='rating' key={i}/>)
             }
             <h3 className='text-[#007185] ml-2 font-bold'>{data.count} ratings</h3>
         </div>
