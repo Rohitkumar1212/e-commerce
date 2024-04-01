@@ -5,12 +5,16 @@ import Logo from "../public/amazon-logo-2.webp"
 import { BiCart } from 'react-icons/bi'
 import { CgSearch } from 'react-icons/cg'
 import { useRouter } from 'next/navigation'
+import { useAppSelector } from '@/lib/supabase/hooks/redux'
+import { getCart } from '@/redux/cartSlice'
 
 const Header = () => {
     const [query, setQuery ] = useState<string>("")
     const route = useRouter()
+
+    const cart = useAppSelector(getCart)
+
     const searchHandler = () => {
-        console.log("seacrhc awhdasdasbd as")
         route.push(`/search/${query}`)
     }
   return (
@@ -47,7 +51,7 @@ const Header = () => {
                             <BiCart size={"40px"}/>
                         </div>
                         <h3 className='mt-4'>cart</h3>
-                        <p className='absolute top-[-8px] left-[18px]'>0</p>
+                        <p className='absolute top-[-8px] left-[18px]'>{cart.length}</p>
                     </div>
                     
                 </div>
