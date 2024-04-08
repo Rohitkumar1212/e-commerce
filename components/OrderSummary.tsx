@@ -5,6 +5,10 @@ import { supabase } from '@/lib/supabase/products';
 import { useAppSelector } from '@/lib/supabase/hooks/redux';
 import { getCart } from '@/redux/cartSlice';
 
+// about stripe /
+// publishable key is used in the frontend 
+// secret key is used in the server 
+
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY!);
 
 const OrderSummary = () => {
@@ -19,6 +23,14 @@ const OrderSummary = () => {
         })
 
         console.log("checkoutSession",checkoutSession)
+
+        //redirect to checkout session
+        const result = await stripe?.redirectToCheckout({
+            sessionId:checkoutSession.data.id,
+        })
+        if(result?.error){
+            console.log("stripe createStripeSession error-", result?.error?.message)
+        }
 
     }
   return (
