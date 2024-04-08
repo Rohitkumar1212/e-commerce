@@ -5,6 +5,7 @@ import OrderSummary from './OrderSummary'
 import Image from 'next/image'
 import amazonLogo from "@/public/amazon-logo.png"
 import { FaLock } from 'react-icons/fa'
+import Link from 'next/link'
 
 const Checkout = () => {
     return (
@@ -12,7 +13,9 @@ const Checkout = () => {
             <div className='absolute top-0 w-full p-12 bg-white'>
                 <div className=' flex items-center justify-between w-[70%] mx-auto border-b-4 border-gray-400 pb-4'>
                     <div>
+                        <Link href={"/"}>
                         <Image alt='amazon logo' src={amazonLogo} height={150} width={150} />
+                        </Link>
                     </div>
                     <div>
                         <h1 className='font-bold text-2xl'>Checkout</h1>
