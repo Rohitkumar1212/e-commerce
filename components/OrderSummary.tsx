@@ -1,6 +1,26 @@
 import React from 'react'
+import {loadStripe} from '@stripe/stripe-js';
+import axios from 'axios';
+import { supabase } from '@/lib/supabase/products';
+import { useAppSelector } from '@/lib/supabase/hooks/redux';
+import { getCart } from '@/redux/cartSlice';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_KEY!);
 
 const OrderSummary = () => {
+    const cart = useAppSelector(getCart)
+    const createStripeSession = async ()=>{
+        const { data: {user}} = await supabase.auth.getUser()
+        const stripe = await stripePromise
+
+        const checkoutSession = await axios.post("/api/checkout-sessions",{
+            items:cart,
+            email:user?.email
+        })
+
+        console.log("checkoutSession",checkoutSession)
+
+    }
   return (
     <div className=' border border-gray p-4 mt-5'>
         <div>
@@ -29,7 +49,9 @@ const OrderSummary = () => {
             </div>
         </div>
         <div>
-            <button className='bg-[#FFD814] w-full rounded px-4 py-1 my-3'>Place your order now</button>
+            <button
+            onClick={createStripeSession}
+            className='bg-[#FFD814] w-full rounded px-4 py-1 my-3'>Place your order now</button>
         </div>
     </div>
   )

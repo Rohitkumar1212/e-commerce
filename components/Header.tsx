@@ -29,7 +29,6 @@ const Header = () => {
     useEffect(()=>{
         getUserData()
     },[])
-    console.log("user", user)
   return (
     <>
     <div className='bg-[#131921] text-white pt-4 pb-3'>
