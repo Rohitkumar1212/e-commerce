@@ -29,7 +29,7 @@ const DeliveryAddress = () => {
                         <div className='flex flex-col gap-4'>
                             {
                                 cart.map((product: any) => (
-                                    <div className='ml-4 '>
+                                    <div className='ml-4 ' key={product.id}>
                                         <div className='flex'>
                                             <Image alt={product.title} src={product.image} width={100} height={100} />
                                             <div className='ml-4'>
