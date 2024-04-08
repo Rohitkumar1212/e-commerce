@@ -27,7 +27,7 @@ const ShoppingCart = () => {
                                 <p className='text-[#007600] my-2 font-bold text-xs'>In Stock</p>
                                 <h3
                                     onClick={() => dispatch(removeFromTheCart(product.id))}
-                                    className='font-bold cursor-pointer text-red-600'>Remove</h3>
+                                    className='font-bold cursor-pointer text-red-600 w-fit'>Remove</h3>
                                 <div className='text-xl font-medium flex justify-between items-center w-fit bg-gray-200 rounded-md px-5 py-1 my-4'>
                                     <div
                                         onClick={() => product.quantity > 1 && dispatch(decreamentQuantity(product))}

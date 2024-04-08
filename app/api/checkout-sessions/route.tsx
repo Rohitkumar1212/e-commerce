@@ -35,8 +35,11 @@ export async function POST(req:NextRequest, res:NextResponse){
         metadata: {
             email,
             images:JSON.stringify(items.map((item:any)=>item.image))
-        }
+        },
+        
     })
+
+    
 
     return NextResponse.json({
         id:session.id
