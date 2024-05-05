@@ -10,7 +10,7 @@ const Success = () => {
     return (
         <div className='absolute top-0 w-full bg-white py-12'>
             <div className='w-[70%] mx-auto'>
-                <h2> Thank yoou for prdering with Amazon the items.
+                <h2> Thank you for ordering with us,  the items.
                 </h2>
                 <div>
                     <h3 className='font-bold py-3 underline'>Order Details</h3>
